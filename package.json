@@ -1,12 +1,12 @@
 {
   "name": "@open-tech-world/node-glob",
   "version": "0.1.0",
-  "description": "",
-  "keywords": [],
+  "description": "Match files using glob patterns.",
+  "keywords": ["match", "files", "glob", "pattern", "node"],
   "author": {
     "name": "Thanga Ganapathy",
     "email": "ganapathy888@gmail.com",
-    "url": ""
+    "url": "https://thanga-ganapathy.github.io"
   },
   "license": "MIT",
   "homepage": "",

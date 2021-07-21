@@ -1,6 +1,6 @@
 # @open-tech-world/node-glob
 
-> Description
+> Match files using glob patterns.
 
 ## Installation
 
@@ -18,4 +18,4 @@ yarn add @open-tech-world/node-glob
 
 ## License
 
-Copyright (c) 2021, Thanga Ganapathy ([MIT License](./LICENSE)).
+Copyright (c) 2021, [Thanga Ganapathy](https://thanga-ganapathy.github.io) ([MIT License](./LICENSE)).
