@@ -20,6 +20,7 @@ function run(currentPath: string, patterns: string[], result: string[]): void {
   for (let i = 0; i < matchedDirs.length; i++) {
     if (isMatch(matchedDirs[i], patterns)) {
       result.push(matchedDirs[i]);
+      run(matchedDirs[i], patterns, result);
     } else {
       run(matchedDirs[i], patterns, result);
     }
