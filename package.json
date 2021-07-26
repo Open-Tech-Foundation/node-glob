@@ -2,7 +2,13 @@
   "name": "@open-tech-world/node-glob",
   "version": "0.1.0",
   "description": "Match files using glob patterns.",
-  "keywords": ["match", "files", "glob", "pattern", "node"],
+  "keywords": [
+    "match",
+    "files",
+    "glob",
+    "pattern",
+    "node"
+  ],
   "author": {
     "name": "Thanga Ganapathy",
     "email": "ganapathy888@gmail.com",
@@ -40,11 +46,17 @@
     "cross-env": "^7.0.3",
     "eslint": "^7.31.0",
     "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-jest": "^24.3.7",
+    "eslint-plugin-jest": "^24.4.0",
     "eslint-plugin-prettier": "^3.4.0",
+    "fast-glob": "^3.2.7",
+    "globby": "^12.0.0",
     "jest": "^27.0.6",
     "prettier": "^2.3.2",
-    "rollup": "^2.53.2",
+    "rollup": "^2.54.0",
     "typescript": "^4.3.5"
+  },
+  "dependencies": {
+    "@open-tech-world/es-glob": "^0.3.0",
+    "@open-tech-world/es-utils": "^0.6.0"
   }
 }

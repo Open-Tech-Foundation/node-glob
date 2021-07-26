@@ -2,6 +2,7 @@ import nodeGlob from '../lib/index.js';
 
 describe('nodeGlob', () => {
   test('index', () => {
-    expect(nodeGlob()).toMatch(/Hello World!/);
+    // expect(() => nodeGlob()).toThrow();
+    expect(() => nodeGlob('*.json')).not.toThrow();
   });
 });
