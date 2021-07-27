@@ -2,7 +2,8 @@ import nodeGlob from './lib/index.js';
 import fg from 'fast-glob';
 import { globbySync } from 'globby';
 
-const pattern = ['new file* ', '!node_modules', '!.git', '!.yarn'];
+// Change patterns here & run `node benchmark.js`
+const pattern = ['*', '!node_modules', '!.git', '!.yarn'];
 console.log();
 console.log('Pattern: ', pattern);
 console.log();
@@ -29,7 +30,6 @@ console.timeEnd('Fg');
 console.log();
 console.log(fgResult);
 console.log();
-
 
 console.log(
   'fg: ',
