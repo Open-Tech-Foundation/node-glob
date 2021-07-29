@@ -1,3 +1,3 @@
-export interface IOptions {
+export default interface IOptions {
   cwd: string | undefined;
 }

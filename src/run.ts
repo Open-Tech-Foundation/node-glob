@@ -1,7 +1,7 @@
 import isMatch from './isMatch';
-
 import getMatchingDirs from './getMatchingDirs';
 import getEntries from './getEntries';
+import IDir from './IDir';
 
 function run(
   currentPath: string,
@@ -10,18 +10,26 @@ function run(
   cwd: string
 ): void {
   const [filesList, dirList] = getEntries(currentPath, cwd);
+  const matchedFiles = filesList.filter((file) => isMatch(file, patterns));
 
-  const matchedDirs = getMatchingDirs(dirList, patterns);
+  if (dirList.length === 0) {
+    result.push(...matchedFiles);
+    return;
+  }
+
+  const matchedDirs: IDir[] = getMatchingDirs(dirList, patterns);
+
   for (let i = 0; i < matchedDirs.length; i++) {
-    if (isMatch(matchedDirs[i], patterns)) {
-      result.push(matchedDirs[i]);
-      run(matchedDirs[i], patterns, result, cwd);
-    } else {
-      run(matchedDirs[i], patterns, result, cwd);
+    const dir = matchedDirs[i];
+    if (dir.match) {
+      result.push(dir.path);
+    }
+
+    if (dir.follow) {
+      run(dir.path, patterns, result, cwd);
     }
   }
 
-  const matchedFiles = filesList.filter((file) => isMatch(file, patterns));
   result.push(...matchedFiles);
 }
 

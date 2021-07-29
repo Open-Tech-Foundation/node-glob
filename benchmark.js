@@ -2,7 +2,7 @@ import nodeGlob from './lib/index.js';
 import fg from 'fast-glob';
 import { globbySync } from 'globby';
 
-// Change patterns here & run `node benchmark.js`
+// Change patterns here & run `yarn build` and run `node benchmark.js`
 const pattern = ['*', '!node_modules', '!.git', '!.yarn'];
 console.log();
 console.log('Pattern: ', pattern);

@@ -1,6 +1,6 @@
 import getFinalPatterns from './getFinalPatterns';
 import run from './run';
-import { IOptions } from './IOptions';
+import IOptions from './IOptions';
 
 function nodeGlob(patterns: string | string[], options: IOptions): string[] {
   const result: string[] = [];
