@@ -46,53 +46,58 @@ describe('nodeGlob', () => {
       'config.json',
       'tsconfig.json',
     ]);
-    expect(globSync(['a/*'], options)).toEqual(['a/a2', 'a/a.txt']);
+    expect(globSync(['a/*'], options)).toEqual([
+      Path.join('a', 'a2'),
+      Path.join('a', 'a.txt'),
+    ]);
     expect(globSync(['*_modules/*'], options)).toEqual([
-      'node_modules/@open-tech-world',
+      Path.join('node_modules', '@open-tech-world'),
     ]);
     expect(globSync(['*_modules/*/*'], options)).toEqual([
-      'node_modules/@open-tech-world/lib',
+      Path.join('node_modules', '@open-tech-world/lib'),
     ]);
-    expect(globSync(['x/*/z/*.json'], options)).toEqual(['x/y/z/x.json']);
+    expect(globSync(['x/*/z/*.json'], options)).toEqual([
+      Path.join('x', 'y', 'z', 'x.json'),
+    ]);
   });
 
   test('Glob star', () => {
     expect(globSync(['**'], options)).toEqual([
       'a',
-      'a/a2',
-      'a/a2/a2.txt',
-      'a/a.txt',
+      Path.join('a', 'a2'),
+      Path.join('a', 'a2', 'a2.txt'),
+      Path.join('a', 'a.txt'),
       'b',
-      'b/b.png',
+      Path.join('b', 'b.png'),
       'c',
-      'c/c.js',
+      Path.join('c', 'c.js'),
       'c++',
-      'c++/array.cpp',
+      Path.join('c++', 'array.cpp'),
       'd',
-      'd/d.ts',
+      Path.join('d', 'd.ts'),
       'e',
-      'e/e.md',
+      Path.join('e', 'e.md'),
       'node_modules',
-      'node_modules/@open-tech-world',
-      'node_modules/@open-tech-world/lib',
-      'node_modules/@open-tech-world/lib/index.js',
+      Path.join('node_modules', '@open-tech-world'),
+      Path.join('node_modules', '@open-tech-world', 'lib'),
+      Path.join('node_modules', '@open-tech-world', 'lib', 'index.js'),
       'public',
-      'public/assets',
-      'public/assets/$.svg',
-      'public/assets/*.jpg',
-      'public/assets/banner(old).png',
-      'public/assets/banner.png',
-      'public/assets/img[01].jpg',
-      'public/assets/img[02].jpg',
-      'public/assets/img[03].jpg',
-      'public/assets/logo.svg',
-      'public/assets/welcome.gif',
+      Path.join('public', 'assets'),
+      Path.join('public', 'assets', '$.svg'),
+      Path.join('public', 'assets', '*.jpg'),
+      Path.join('public', 'assets', 'banner(old).png'),
+      Path.join('public', 'assets', 'banner.png'),
+      Path.join('public', 'assets', 'img[01].jpg'),
+      Path.join('public', 'assets', 'img[02].jpg'),
+      Path.join('public', 'assets', 'img[03].jpg'),
+      Path.join('public', 'assets', 'logo.svg'),
+      Path.join('public', 'assets', 'welcome.gif'),
       'src',
-      'src/index.js',
+      Path.join('src', 'index.js'),
       'x',
-      'x/y',
-      'x/y/z',
-      'x/y/z/x.json',
+      Path.join('x', 'y'),
+      Path.join('x', 'y', 'z'),
+      Path.join('x', 'y', 'z', 'x.json'),
       'config.json',
       'jest.config.js',
       'new-site.html',
@@ -101,62 +106,68 @@ describe('nodeGlob', () => {
     ]);
 
     expect(globSync(['.git/**'], { ...options, dot: true })).toEqual([
-      '.git/branches',
-      '.git/branches/b1',
-      '.git/branches/b2',
+      Path.join('.git', 'branches'),
+      Path.join('.git', 'branches', 'b1'),
+      Path.join('.git', 'branches', 'b2'),
     ]);
 
     expect(globSync(['**/@**'], options)).toEqual([
-      'node_modules/@open-tech-world',
-      'node_modules/@open-tech-world/lib',
+      Path.join('node_modules', '@open-tech-world'),
+      Path.join('node_modules', '@open-tech-world/lib'),
     ]);
 
     expect(globSync(['**/@**/*'], options)).toEqual([
-      'node_modules/@open-tech-world/lib',
-      'node_modules/@open-tech-world/lib/index.js',
+      Path.join('node_modules', '@open-tech-world', 'lib'),
+      Path.join('node_modules', '@open-tech-world', 'lib', 'index.js'),
     ]);
 
     expect(globSync(['**.js'], options)).toEqual(['jest.config.js']);
 
     expect(globSync(['**/**.js'], options)).toEqual([
-      'c/c.js',
-      'node_modules/@open-tech-world/lib/index.js',
-      'src/index.js',
+      Path.join('c', 'c.js'),
+      Path.join('node_modules', '@open-tech-world', 'lib', 'index.js'),
+      Path.join('src', 'index.js'),
     ]);
 
-    expect(globSync(['x/**/z/**'], options)).toEqual(['x/y/z/x.json']);
+    expect(globSync(['x/**/z/**'], options)).toEqual([
+      Path.join('x', 'y', 'z', 'x.json'),
+    ]);
   });
 
   test('Question mark', () => {
     expect(globSync(['?'], options)).toEqual(['a', 'b', 'c', 'd', 'e', 'x']);
     expect(globSync(['a?'], options)).toEqual([]);
     expect(globSync(['.git/branches/b?'], { ...options, dot: true })).toEqual([
-      '.git/branches/b1',
-      '.git/branches/b2',
+      Path.join('.git', 'branches', 'b1'),
+      Path.join('.git', 'branches', 'b2'),
     ]);
-    expect(globSync(['e/?.md'], options)).toEqual(['e/e.md']);
+    expect(globSync(['e/?.md'], options)).toEqual([Path.join('e', 'e.md')]);
   });
 
   test('Square brackets', () => {
     expect(globSync(['[]'], options)).toEqual([]);
     expect(globSync(['[a]'], options)).toEqual(['a']);
     expect(globSync(['[a]'], options)).toEqual(['a']);
-    expect(globSync(['d/[a-e].ts'], options)).toEqual(['d/d.ts']);
-    expect(globSync(['d/[a-e].[a-z]s'], options)).toEqual(['d/d.ts']);
+    expect(globSync(['d/[a-e].ts'], options)).toEqual([Path.join('d', 'd.ts')]);
+    expect(globSync(['d/[a-e].[a-z]s'], options)).toEqual([
+      Path.join('d', 'd.ts'),
+    ]);
     expect(globSync(['[!a]'], options)).toEqual(['b', 'c', 'd', 'e', 'x']);
     expect(globSync(['[^b-d]'], options)).toEqual(['a', 'e', 'x']);
   });
 
   test('Escape characters', () => {
     expect(globSync(['public/assets/img\\[01\\].jpg'], options)).toEqual([
-      'public/assets/img[01].jpg',
+      Path.join('public', 'assets', 'img[01].jpg'),
     ]);
     expect(globSync(['public/assets/\\*.*'], options)).toEqual([
-      'public/assets/*.jpg',
+      Path.join('public', 'assets', '*.jpg'),
     ]);
-    expect(globSync(['c\\+\\+/array.cpp'], options)).toEqual(['c++/array.cpp']);
+    expect(globSync(['c\\+\\+/array.cpp'], options)).toEqual([
+      Path.join('c++', 'array.cpp'),
+    ]);
     expect(globSync(['public/assets/banner\\(old\\).png'], options)).toEqual([
-      'public/assets/banner(old).png',
+      Path.join('public', 'assets', 'banner(old).png'),
     ]);
   });
 
@@ -236,15 +247,15 @@ describe('nodeGlob', () => {
         options
       )
     ).toEqual([
-      'public/assets',
-      'public/assets/$.svg',
-      'public/assets/*.jpg',
-      'public/assets/banner(old).png',
-      'public/assets/img[01].jpg',
-      'public/assets/img[02].jpg',
-      'public/assets/img[03].jpg',
-      'public/assets/logo.svg',
-      'public/assets/welcome.gif',
+      Path.join('public', 'assets'),
+      Path.join('public', 'assets', '$.svg'),
+      Path.join('public', 'assets', '*.jpg'),
+      Path.join('public', 'assets', 'banner(old).png'),
+      Path.join('public', 'assets', 'img[01].jpg'),
+      Path.join('public', 'assets', 'img[02].jpg'),
+      Path.join('public', 'assets', 'img[03].jpg'),
+      Path.join('public', 'assets', 'logo.svg'),
+      Path.join('public', 'assets', 'welcome.gif'),
     ]);
 
     expect(
@@ -253,12 +264,12 @@ describe('nodeGlob', () => {
         options
       )
     ).toEqual([
-      'public/assets',
-      'public/assets/$.svg',
-      'public/assets/banner(old).png',
-      'public/assets/banner.png',
-      'public/assets/logo.svg',
-      'public/assets/welcome.gif',
+      Path.join('public', 'assets'),
+      Path.join('public', 'assets', '$.svg'),
+      Path.join('public', 'assets', 'banner(old).png'),
+      Path.join('public', 'assets', 'banner.png'),
+      Path.join('public', 'assets', 'logo.svg'),
+      Path.join('public', 'assets', 'welcome.gif'),
     ]);
   });
 
@@ -269,9 +280,9 @@ describe('nodeGlob', () => {
       'tsconfig.json',
     ]);
     expect(globSync(['public/assets/*.(svg|gif)'], options)).toEqual([
-      'public/assets/$.svg',
-      'public/assets/logo.svg',
-      'public/assets/welcome.gif',
+      Path.join('public', 'assets', '$.svg'),
+      Path.join('public', 'assets', 'logo.svg'),
+      Path.join('public', 'assets', 'welcome.gif'),
     ]);
   });
 });

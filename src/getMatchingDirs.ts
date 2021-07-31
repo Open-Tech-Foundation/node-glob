@@ -42,7 +42,7 @@ function getMatchingDirs(dirList: string[], patterns: string[]): IDir[] {
   const allowedDirs = arrayDiff(dirList, ignoredDirs) as string[];
 
   for (let i = 0; i < allowedDirs.length; i++) {
-    const dir = allowedDirs[i];
+    const dir = allowedDirs[i].replace(/(?:\\)/g, '/');
     const match = isPathMatch(dir, allowedPatterns);
     const follow = canFollow(dir, allowedPatterns);
     result.push({ path: dir, match, follow });

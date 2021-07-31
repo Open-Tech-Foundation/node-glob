@@ -13,16 +13,17 @@ function splitPatterns(patterns: string[]): string[][] {
 }
 
 function isMatch(entry: string, patterns: string[]): boolean {
+  const curEntry = entry.replace(/(?:\\)/g, '/');
   const [posPats, negPats] = splitPatterns(patterns);
 
   for (let i = 0; i < negPats.length; i++) {
-    if (!matchGlob(entry, negPats[i])) {
+    if (!matchGlob(curEntry, negPats[i])) {
       return false;
     }
   }
 
   for (let i = 0; i < posPats.length; i++) {
-    if (matchGlob(entry, posPats[i])) {
+    if (matchGlob(curEntry, posPats[i])) {
       return true;
     }
   }
