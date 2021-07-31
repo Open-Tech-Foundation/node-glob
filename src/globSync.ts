@@ -2,7 +2,10 @@ import getFinalPatterns from './getFinalPatterns';
 import run from './run';
 import IOptions from './IOptions';
 
-function globSync(patterns: string | string[], options: IOptions): string[] {
+function globSync(
+  patterns: string | string[],
+  options?: Partial<IOptions> | undefined
+): string[] {
   const result: string[] = [];
   const defaultOptions: IOptions = {
     cwd: process.cwd(),

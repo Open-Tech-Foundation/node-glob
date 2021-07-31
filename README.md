@@ -45,7 +45,7 @@ globSync(patterns: string | string[], options: IOptions): string[];
 | Name | Type | Default | Description |
 |------|------|---------|------|
 | cwd  | string | process.cwd() | The current working directory in which to search files & folders.|
-| dot  | boolean | false | If true, it matches files & directories that begin with a `.`(dot) character.|
+| dot  | boolean | false | If true, it matches files & directories that begin with a `"."`(dot) character.|
 
 ## Examples
 
