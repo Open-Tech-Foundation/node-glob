@@ -12,8 +12,10 @@ function getIgnoredDirs(
 }
 
 function isPathMatch(dir: string, patterns: string[]): boolean {
+  const curDir = dir.replace(/(?:\\)/g, '/');
+
   for (let i = 0; i < patterns.length; i++) {
-    if (matchGlob(dir, patterns[i])) {
+    if (matchGlob(curDir, patterns[i])) {
       return true;
     }
   }
@@ -22,9 +24,11 @@ function isPathMatch(dir: string, patterns: string[]): boolean {
 }
 
 function canFollow(dir: string, patterns: string[]): boolean {
+  const curDir = dir.replace(/(?:\\)/g, '/');
+
   for (let i = 0; i < patterns.length; i++) {
-    if (patterns[i] !== '*' && dir !== patterns[i]) {
-      if (matchPathGlob(dir, patterns[i])) {
+    if (patterns[i] !== '*' && curDir !== patterns[i]) {
+      if (matchPathGlob(curDir, patterns[i])) {
         return true;
       }
     }
@@ -42,7 +46,7 @@ function getMatchingDirs(dirList: string[], patterns: string[]): IDir[] {
   const allowedDirs = arrayDiff(dirList, ignoredDirs) as string[];
 
   for (let i = 0; i < allowedDirs.length; i++) {
-    const dir = allowedDirs[i].replace(/(?:\\)/g, '/');
+    const dir = allowedDirs[i];
     const match = isPathMatch(dir, allowedPatterns);
     const follow = canFollow(dir, allowedPatterns);
     result.push({ path: dir, match, follow });
