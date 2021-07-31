@@ -35,9 +35,9 @@ yarn add @open-tech-world/node-glob
 ## Usage
 
 ```ts
-import nodeGlob from '@open-tech-world/node-glob';
+import { globSync } from '@open-tech-world/node-glob';
 
-nodeGlob(patterns: string | string[], options: IOptions): string[];
+globSync(patterns: string | string[], options: IOptions): string[];
 ```
 
 ### Options
@@ -64,19 +64,21 @@ my-app/
 ├─ README.md
 ```
 ```ts
-import nodeGlob from '@open-tech-world/node-glob';
+import { globSync } from '@open-tech-world/node-glob';
 
-nodeGlob(['*']) // ['node_modules', 'public', 'src', 'package.json', 'README.md']
+globSync(['*']) // ['node_modules', 'public', 'src', 'package.json', 'README.md']
 
-nodeGlob(['*'], { dot: true }) // ['node_modules', 'public', 'src', '.gitignore', 'package.json', 'README.md']
+globSync(['*'], { dot: true }) // ['node_modules', 'public', 'src', '.gitignore', 'package.json', 'README.md']
 
-nodeGlob(['*', '!node_modules']) // ['public', 'src', 'package.json', 'README.md']
+globSync(['*', '!node_modules']) // ['public', 'src', 'package.json', 'README.md']
 
-nodeGlob(['*.json']) // ['package.json']
+globSync(['*.json']) // ['package.json']
 
-nodeGlob(['src/index.*']) // ['src/index.css', 'src/index.js']
+globSync(['src/index.*']) // ['src/index.css', 'src/index.js']
 
-nodeGlob(['**/index.[a-j]*']) // ['src/index.css', 'src/index.js']
+globSync(['**/index.[a-j]*']) // ['src/index.css', 'src/index.js']
+
+globSync(['public/*.(html|ico)']) // ['public/index.html', 'public/favicon.ico']
 ```
 
 ## License
