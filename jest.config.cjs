@@ -3,7 +3,7 @@
  * https://jestjs.io/docs/configuration
  */
 
-export default {
+module.exports = {
   // All imported modules in your tests should be mocked automatically
   // automock: false,
 
@@ -125,7 +125,7 @@ export default {
   // runner: "jest-runner",
 
   // The paths to modules that run some code to configure or set up the testing environment before each test
-  // setupFiles: [],
+  setupFiles: ['./setup.js'],
 
   // A list of paths to modules that run some code to configure or set up the testing framework before each test
   // setupFilesAfterEnv: [],
@@ -146,10 +146,7 @@ export default {
   // testLocationInResults: false,
 
   // The glob patterns Jest uses to detect test files
-  // testMatch: [
-  //   "**/__tests__/**/*.[jt]s?(x)",
-  //   "**/?(*.)+(spec|test).[tj]s?(x)"
-  // ],
+  testMatch: ['**/?(*.)+(spec).js'],
 
   // An array of regexp pattern strings that are matched against all test paths, matched tests are skipped
   // testPathIgnorePatterns: [
