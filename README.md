@@ -1,18 +1,22 @@
+<div align="center">
+
 # @open-tech-world/node-glob
+
+</div>
 
 > Match files & directories using [glob](https://en.wikipedia.org/wiki/Glob_(programming)) patterns.
 
-It uses [@open-tech-worl/es-glob](https://github.com/open-tech-world/es-glob) for path matching.
+It uses [@open-tech-worl/es-glob](https://github.com/open-tech-world/es-glob) for matching paths.
 
-See the list of available glob patterns [here](https://github.com/open-tech-world/es-glob#supported-glob-patterns).
+See the list of supported glob patterns [here](https://github.com/open-tech-world/es-glob#supported-glob-patterns).
 
 ## Features
 
-✔️ Sync matching
+✔️ Sync Matching API
 
-🚧 ASync matching
+🚧 Async Matching API
 
-✔️ Supports multiple patterns
+✔️ Supports Multiple Patterns
 
 ## Installation
 
@@ -40,7 +44,8 @@ nodeGlob(patterns: string | string[], options: IOptions): string[];
 
 | Name | Type | Default | Description |
 |------|------|---------|------|
-| cwd  | string \| undefined | process.cwd() | The current working directory in which to search files & folders.|
+| cwd  | string | process.cwd() | The current working directory in which to search files & folders.|
+| dot  | boolean | false | If true, it matches files & directories that begin with a `.`(dot) character.|
 
 ## Examples
 
@@ -62,6 +67,8 @@ my-app/
 import nodeGlob from '@open-tech-world/node-glob';
 
 nodeGlob(['*']) // ['node_modules', 'public', 'src', 'package.json', 'README.md']
+
+nodeGlob(['*'], { dot: true }) // ['node_modules', 'public', 'src', '.gitignore', 'package.json', 'README.md']
 
 nodeGlob(['*', '!node_modules']) // ['public', 'src', 'package.json', 'README.md']
 

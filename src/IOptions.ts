@@ -1,3 +1,4 @@
 export default interface IOptions {
-  cwd: string | undefined;
+  cwd: string;
+  dot: boolean;
 }
