@@ -1,6 +1,6 @@
 {
   "name": "@open-tech-world/node-glob",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Match files & directories using glob patterns.",
   "keywords": [
     "match",
