@@ -84,7 +84,6 @@ describe('nodeGlob', () => {
       'public',
       Path.join('public', 'assets'),
       Path.join('public', 'assets', '$.svg'),
-      Path.join('public', 'assets', '*.jpg'),
       Path.join('public', 'assets', 'banner(old).png'),
       Path.join('public', 'assets', 'banner.png'),
       Path.join('public', 'assets', 'img[01].jpg'),
@@ -160,8 +159,8 @@ describe('nodeGlob', () => {
     expect(globSync(['public/assets/img\\[01\\].jpg'], options)).toEqual([
       Path.join('public', 'assets', 'img[01].jpg'),
     ]);
-    expect(globSync(['public/assets/\\*.*'], options)).toEqual([
-      Path.join('public', 'assets', '*.jpg'),
+    expect(globSync(['public/assets/\\$.*'], options)).toEqual([
+      Path.join('public', 'assets', '$.svg'),
     ]);
     expect(globSync(['c\\+\\+/array.cpp'], options)).toEqual([
       Path.join('c++', 'array.cpp'),
@@ -249,7 +248,6 @@ describe('nodeGlob', () => {
     ).toEqual([
       Path.join('public', 'assets'),
       Path.join('public', 'assets', '$.svg'),
-      Path.join('public', 'assets', '*.jpg'),
       Path.join('public', 'assets', 'banner(old).png'),
       Path.join('public', 'assets', 'img[01].jpg'),
       Path.join('public', 'assets', 'img[02].jpg'),
