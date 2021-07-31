@@ -37,10 +37,10 @@ yarn add @open-tech-world/node-glob
 ```ts
 import { globSync } from '@open-tech-world/node-glob';
 
-globSync(patterns: string | string[], options: IOptions): string[];
+globSync(patterns: string | string[], options?: Partial<IOptions>): string[];
 ```
 
-### Options
+#### Options
 
 | Name | Type | Default | Description |
 |------|------|---------|------|

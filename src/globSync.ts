@@ -4,7 +4,7 @@ import IOptions from './IOptions';
 
 function globSync(
   patterns: string | string[],
-  options?: Partial<IOptions> | undefined
+  options?: Partial<IOptions>
 ): string[] {
   const result: string[] = [];
   const defaultOptions: IOptions = {
