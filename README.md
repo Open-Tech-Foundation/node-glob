@@ -37,7 +37,8 @@ yarn add @open-tech-world/node-glob
 ```ts
 import { globSync } from '@open-tech-world/node-glob';
 
-globSync(patterns: string | string[], options?: Partial<IOptions>): string[];
+globSync(patterns: string | string[], 
+         options?: Partial<IOptions>): string[];
 ```
 
 #### Options
@@ -46,6 +47,7 @@ globSync(patterns: string | string[], options?: Partial<IOptions>): string[];
 |------|------|---------|------|
 | cwd  | string | process.cwd() | The current working directory in which to search files & folders.|
 | dot  | boolean | false | If true, it matches files & directories that begin with a `"."`(dot) character.|
+| absolute  | boolean | false | If true, it returns the absolute path.|
 
 ## Examples
 

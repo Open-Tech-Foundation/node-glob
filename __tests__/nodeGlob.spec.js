@@ -283,4 +283,12 @@ describe('nodeGlob', () => {
       Path.join('public', 'assets', 'welcome.gif'),
     ]);
   });
+
+  it('returns absolute paths', () => {
+    expect(globSync(['[a-c]'], { ...options, absolute: true })).toEqual([
+      Path.join(Path.sep, 'tmp', 'nodeGlob', 'a'),
+      Path.join(Path.sep, 'tmp', 'nodeGlob', 'b'),
+      Path.join(Path.sep, 'tmp', 'nodeGlob', 'c'),
+    ]);
+  });
 });

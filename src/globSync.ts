@@ -10,6 +10,7 @@ function globSync(
   const defaultOptions: IOptions = {
     cwd: process.cwd(),
     dot: false,
+    absolute: false,
   };
   const currentOptions = Object.assign(defaultOptions, options);
   const finalPatterns = getFinalPatterns(patterns);

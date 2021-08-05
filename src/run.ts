@@ -1,8 +1,24 @@
+import Path from 'path';
+
 import isMatch from './isMatch';
 import getMatchingDirs from './getMatchingDirs';
 import getEntries from './getEntries';
 import IDir from './IDir';
 import IOptions from './IOptions';
+
+function addToResult(
+  result: string[],
+  list: string | string[],
+  options: IOptions
+): void {
+  let entries = typeof list === 'string' ? [list] : list;
+
+  if (options.absolute) {
+    entries = entries.map((entry) => Path.join(options.cwd, entry));
+  }
+
+  result.push(...entries);
+}
 
 function run(
   currentPath: string,
@@ -14,7 +30,7 @@ function run(
   const matchedFiles = filesList.filter((file) => isMatch(file, patterns));
 
   if (dirList.length === 0) {
-    result.push(...matchedFiles);
+    addToResult(result, matchedFiles, options);
     return;
   }
 
@@ -23,7 +39,7 @@ function run(
   for (let i = 0; i < matchedDirs.length; i++) {
     const dir = matchedDirs[i];
     if (dir.match) {
-      result.push(dir.path);
+      addToResult(result, dir.path, options);
     }
 
     if (dir.follow) {
@@ -31,7 +47,7 @@ function run(
     }
   }
 
-  result.push(...matchedFiles);
+  addToResult(result, matchedFiles, options);
 }
 
 export default run;
