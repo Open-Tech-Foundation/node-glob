@@ -289,9 +289,9 @@ describe('nodeGlob', () => {
 
   it('returns absolute paths', () => {
     expect(globSync(['[a-c]'], { ...options, absolute: true })).toEqual([
-      Path.join(Path.sep, 'tmp', 'nodeGlob', 'a'),
-      Path.join(Path.sep, 'tmp', 'nodeGlob', 'b'),
-      Path.join(Path.sep, 'tmp', 'nodeGlob', 'c'),
+      Path.join(tempDir, 'a'),
+      Path.join(tempDir, 'b'),
+      Path.join(tempDir, 'c'),
     ]);
   });
 
