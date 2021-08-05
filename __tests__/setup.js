@@ -28,6 +28,7 @@ const paths = [
   'public/assets/img[02].jpg',
   'public/assets/img[03].jpg',
   'public/assets/$.svg',
+  'public/robots.txt',
   'c++/array.cpp',
   'new-site.html',
 ];

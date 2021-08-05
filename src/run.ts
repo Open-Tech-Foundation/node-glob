@@ -29,7 +29,7 @@ function run(
   const [filesList, dirList] = getEntries(currentPath, options);
   const matchedFiles = filesList.filter((file) => isMatch(file, patterns));
 
-  if (dirList.length === 0) {
+  if (dirList.length === 0 && options.files) {
     addToResult(result, matchedFiles, options);
     return;
   }
@@ -38,7 +38,7 @@ function run(
 
   for (let i = 0; i < matchedDirs.length; i++) {
     const dir = matchedDirs[i];
-    if (dir.match) {
+    if (dir.match && options.dirs) {
       addToResult(result, dir.path, options);
     }
 
@@ -47,7 +47,9 @@ function run(
     }
   }
 
-  addToResult(result, matchedFiles, options);
+  if (options.files) {
+    addToResult(result, matchedFiles, options);
+  }
 }
 
 export default run;

@@ -91,6 +91,7 @@ describe('nodeGlob', () => {
       Path.join('public', 'assets', 'img[03].jpg'),
       Path.join('public', 'assets', 'logo.svg'),
       Path.join('public', 'assets', 'welcome.gif'),
+      Path.join('public', 'robots.txt'),
       'src',
       Path.join('src', 'index.js'),
       'x',
@@ -254,6 +255,7 @@ describe('nodeGlob', () => {
       Path.join('public', 'assets', 'img[03].jpg'),
       Path.join('public', 'assets', 'logo.svg'),
       Path.join('public', 'assets', 'welcome.gif'),
+      Path.join('public', 'robots.txt'),
     ]);
 
     expect(
@@ -268,6 +270,7 @@ describe('nodeGlob', () => {
       Path.join('public', 'assets', 'banner.png'),
       Path.join('public', 'assets', 'logo.svg'),
       Path.join('public', 'assets', 'welcome.gif'),
+      Path.join('public', 'robots.txt'),
     ]);
   });
 
@@ -290,5 +293,23 @@ describe('nodeGlob', () => {
       Path.join(Path.sep, 'tmp', 'nodeGlob', 'b'),
       Path.join(Path.sep, 'tmp', 'nodeGlob', 'c'),
     ]);
+  });
+
+  it('returns only files', () => {
+    expect(globSync(['public/*'], { ...options, dirs: false })).toEqual([
+      Path.join('public', 'robots.txt'),
+    ]);
+  });
+
+  it('returns only dirs', () => {
+    expect(globSync(['public/*'], { ...options, files: false })).toEqual([
+      Path.join('public', 'assets'),
+    ]);
+  });
+
+  it('returns empty for dirs & files false', () => {
+    expect(
+      globSync(['public/*'], { ...options, files: false, dirs: false })
+    ).toEqual([]);
   });
 });

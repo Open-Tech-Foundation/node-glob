@@ -11,6 +11,8 @@ function globSync(
     cwd: process.cwd(),
     dot: false,
     absolute: false,
+    dirs: true,
+    files: true,
   };
   const currentOptions = Object.assign(defaultOptions, options);
   const finalPatterns = getFinalPatterns(patterns);

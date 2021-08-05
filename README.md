@@ -48,6 +48,8 @@ globSync(patterns: string | string[],
 | cwd  | string | process.cwd() | The current working directory in which to search files & folders.|
 | dot  | boolean | false | If true, it matches files & directories that begin with a `"."`(dot) character.|
 | absolute  | boolean | false | If true, it returns the absolute path.|
+| dirs  | boolean | true | If false, it does not include directories.|
+| files  | boolean | true | If false, it does not include files.|
 
 ## Examples
 
