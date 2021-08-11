@@ -1,7 +1,7 @@
 import Os from 'os';
 import Path from 'path';
 
-import { globSync } from '../lib/index.js';
+import { globSync } from '../lib/index.esm.js';
 
 const tempDir = Path.join(Os.tmpdir(), 'nodeGlob');
 
